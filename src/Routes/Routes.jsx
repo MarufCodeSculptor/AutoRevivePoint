@@ -8,6 +8,7 @@ import Contacts from '../Pages/Contacts/Contacts';
 import Apoinments from '../Pages/Apoinments/Apoinments';
 import Login from '../Pages/Login/Login';
 import SignUp from '../Pages/SignUp/SignUp';
+import Checkout from '../Pages/Checkout/Checkout';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp></SignUp>,
+      },
+      {
+        path: '/checkout/:id',
+        element:<Checkout></Checkout>,
       },
     ],
   },

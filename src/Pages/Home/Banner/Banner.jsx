@@ -6,8 +6,9 @@ import img5 from '../../../assets/images/banner/5.jpg';
 import img6 from '../../../assets/images/banner/6.jpg';
 
 const Banner = () => {
+
   return (
-    <div>
+   
       <div className="carousel w-full h-[700px] ">
         {/* single slider container */}
         <div id="slide1" className="carousel-item relative w-full">
@@ -169,7 +170,7 @@ const Banner = () => {
           </div>
         </div>
       </div>
-    </div>
+   
   );
 };
 
