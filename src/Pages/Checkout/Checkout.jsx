@@ -1,15 +1,102 @@
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import axios from 'axios';
+import { useContext } from 'react';
+import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders/AuthProviders';
 
 const Checkout = () => {
-   const {id} =useParams();
-     axios.get(`http://localhost:5000/services/${id}`).then(data=> console.log(data.data)).catch(error=> console.log(error));
-   
+  const { user } = useContext(AuthContext);
+  const { title, _id, img, price } = useLoaderData();
+  console.log(`${user?.email} email from checkout`);
+
+  const handlePost = event => {
+    event.preventDefault();
+
+    const form = event.target;
+
+    const name = form.name.value;
+    const date = form.date.value;
+    const email = form.email.value;
+
+    const booking = {
+      customerName: name,
+      email,
+      img,
+      date,
+      service: title,
+      service_id: _id,
+      price: price,
+    };
+    //  data posting from here
+    axios.post(`http://localhost:5000/bookings`, booking).then(data => {
+      if (data.data.insertedId) {
+        alert('successfully posted');
+      }
+    });
+  };
+
   return (
-    <div className="flex items-center justify-center bg-[#031926] min-h-96 my-10">
-      <h2 className="p-5 text-5xl font-bold capitalize  text-center bg-[#9381ff] rounded-lg shadow-xl">
-        Checkout loading please wait
-      </h2>
+    <div>
+      {/* section header  container */}
+      <div className="">
+        <h3 className="text-3xl uppercase text-center font-bold ">{}</h3>
+      </div>
+      {/* fornm container */}
+      <div>
+        <div className="w-full px-10 my-10    shadow-2xl bg-base-100">
+          <form onSubmit={handlePost} className="border p-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  className="input input-bordered"
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Date</span>
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  className="input input-bordered"
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="email"
+                  className="input input-bordered"
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Due amount</span>
+                </label>
+                <input type="text" className="input input-bordered" />
+              </div>
+            </div>
+
+            <div className="form-control mt-6">
+              <input
+                className="btn btn-primary btn-block"
+                type="submit"
+                value="Order Confirm"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
