@@ -4,6 +4,7 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut
 } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
 export const AuthContext = createContext();
@@ -22,6 +23,10 @@ const AuthProviders = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+  const handleSignOut= async ()=>{
+    signOut(auth).then(res=> console.log(res)).catch(error=> console.log(error));
+    
+  }
   //  user state cheecking first load =>
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -38,6 +43,7 @@ const AuthProviders = ({ children }) => {
     loading,
     createUser,
     signIn,
+    handleSignOut
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

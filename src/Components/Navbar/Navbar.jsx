@@ -1,7 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
 import navlogo from '../../assets/logo.svg';
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProviders/AuthProviders';
 
 const Navbar = () => {
+  const { user, handleSignOut } = useContext(AuthContext);
   const navLinks = (
     <>
       <li>
@@ -19,6 +22,19 @@ const Navbar = () => {
       <li>
         <NavLink to="/contacts"> Contacts </NavLink>
       </li>
+      <li>
+        <NavLink to="/bookings"> Bookings </NavLink>
+      </li>
+      <li>
+        <NavLink to="/login"> Login </NavLink>
+      </li>
+      {user && (
+        <li>
+          <button className="btn btn-error" onClick={handleSignOut}>
+            log out
+          </button>
+        </li>
+      )}
     </>
   );
   return (
