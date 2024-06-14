@@ -1,24 +1,11 @@
-import { useEffect, useState } from 'react';
 import ServiceCard from './ServiceCard/ServiceCard';
-import axios from 'axios';
+import useServices from '../../Hooks/useServices';
 
 const Services = () => {
-  const [services, setServices] = useState([]);
-  const servicesUrl = `http://localhost:5000/services`;
-
-  useEffect(() => {
-    axios
-      .get(servicesUrl)
-      .then(data => {
-        console.log(data.data);
-        setServices(data.data);
-      })
-      .catch(error => console.log(error));
-  }, [servicesUrl]);
+  const services = useServices();
 
   return (
     <div className="">
-      {/* text wrepper elements */}
       <div className="text-center">
         <h3 className="text-2xl font-bold text-orange-600">Our Services</h3>
         <h2 className="text-5xl">Our Service Area</h2>
@@ -29,7 +16,7 @@ const Services = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {services.map(service => (
+        {services?.map(service => (
           <ServiceCard key={service._id} service={service}></ServiceCard>
         ))}
       </div>
