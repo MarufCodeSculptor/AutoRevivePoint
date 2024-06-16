@@ -5,7 +5,7 @@ const useServices = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    // fetch('http://localhost:5000/services')
+    // fetch('https://auto-revive-point-server.vercel.app/services')
     //     .then(res => res.json())
     //     .then(data => setServices(data))
     axiosInstance.get('/services').then(res => setServices(res.data));

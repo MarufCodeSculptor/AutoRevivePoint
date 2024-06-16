@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { useContext } from 'react';
+
 import { useLoaderData } from 'react-router-dom';
-import { AuthContext } from '../../providers/AuthProviders/AuthProviders';
+
 
 const Checkout = () => {
-  const { user } = useContext(AuthContext);
+  
   const { title, _id, img, price } = useLoaderData();
-  console.log(`${user?.email} email from checkout`);
+  
 
   const handlePost = event => {
     event.preventDefault();
@@ -27,11 +27,13 @@ const Checkout = () => {
       price: price,
     };
     //  data posting from here
-    axios.post(`http://localhost:5000/bookings`, booking).then(data => {
-      if (data.data.insertedId) {
-        alert('successfully posted');
-      }
-    });
+    axios
+      .post(`https://auto-revive-point-server.vercel.app/bookings`, booking)
+      .then(data => {
+        if (data.data.insertedId) {
+          alert('successfully posted');
+        }
+      });
   };
 
   return (

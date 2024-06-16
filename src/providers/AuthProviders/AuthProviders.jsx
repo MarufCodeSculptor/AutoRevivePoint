@@ -40,15 +40,23 @@ const AuthProviders = ({ children }) => {
 
       if (currentUser) {
         axios
-          .post('http://localhost:5000/user', loggedUser, {
-            withCredentials: true,
-          })
+          .post(
+            'https://auto-revive-point-server.vercel.app/user',
+            loggedUser,
+            {
+              withCredentials: true,
+            }
+          )
           .then(res => {
             console.log(res.data);
           });
       } else {
         axios
-          .post('http://localhost:5000/logout', loggedUser,{withCredentials:true})
+          .post(
+            'https://auto-revive-point-server.vercel.app/logout',
+            loggedUser,
+            { withCredentials: true }
+          )
           .then(res => console.log(res.data))
           .catch(error => console.log(error));
       }

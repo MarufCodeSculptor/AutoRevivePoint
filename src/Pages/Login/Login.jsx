@@ -23,7 +23,7 @@ const Login = () => {
         if (res.user) {
           axios
             .post(
-              'http://localhost:5000/user',
+              'https://auto-revive-point-server.vercel.app/user',
               { email: userEmail },
               { withCredentials: true }
             )
